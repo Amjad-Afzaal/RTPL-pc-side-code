@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : KeepReferenceXMLSchema.xml
+    Created on : 4. November 2008, 12:11
+    Author     : aslam
+    Description:
+        Purpose of the document follows.
+-->
+
+<ns0:KeepReference  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:ns0='http://xml.netbeans.org/schema/KeepReferenceXMLSchema'
+   xsi:schemaLocation='http://xml.netbeans.org/schema/KeepReferenceXMLSchema KeepReferenceXMLSchema.xsd'>
+
+ <!--<ns0:Package name="*" includeSubPackages="true"/>-->
+
+ <!-- keep Main.class -->
+
+  <!-- <ns0:ClassFile name="Main" includeAllFunctions="false" includeAllFields="false"> -->
+  <!-- 	<ns0:Function name="main" description="([Ljava/lang/String;)V"/> -->
+  <!-- </ns0:ClassFile> -->
+
+
+ <!-- Following classes are required by JVM -->
+  <ns0:ClassFile name="takatuka/vm/VM" includeAllFunctions="false" includeAllFields="false">
+  	<ns0:Function name="initialize" description="()V"/>
+  	<ns0:Function name="terminateThread" description="()V"/>
+  	<ns0:Function name="terminateThreadOnException" description="(Ljava/lang/Exception;)V"/>
+	<ns0:Function name="registerStatics" description="()V"/>
+  </ns0:ClassFile>
+  <ns0:ClassFile name="takatuka/vm/VM$1" includeAllFunctions="true" includeAllFields="false"/>
+ <ns0:ClassFile name="java/lang/ThreadGroup" includeAllFunctions="false" includeAllFields="false"/>
+
+ <ns0:ClassFile name="java/lang/Thread" includeAllFunctions="false" includeAllFields="true">
+	<ns0:Function name="run" description="()V"/>
+  </ns0:ClassFile>
+  <ns0:ClassFile name="java/lang/Object" includeAllFunctions="false" includeAllFields="true"/>
+  <ns0:ClassFile name="java/lang/String" includeAllFunctions="false" includeAllFields="false">
+	<ns0:Field name="value" description="[C"/>
+	<ns0:Field name="offset" description="I"/>
+	<ns0:Field name="count" description="I"/>
+  </ns0:ClassFile>
+  <ns0:ClassFile name="takatuka/vm/ExceptionFactory" includeAllFunctions="true" includeAllFields="true"/>
+  <ns0:ClassFile name="takatuka/vm/StaticInitializer" includeAllFunctions="true" includeAllFields="true"/>
+
+
+
+</ns0:KeepReference>

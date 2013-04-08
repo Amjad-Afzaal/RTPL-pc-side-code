@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT FunctionFlowGraph (Node+)>
+<!ELEMENT Node (Node*)>
+<!ATTLIST Node instrId CDATA #REQUIRED>
+<!ATTLIST Node name CDATA #REQUIRED>
+<!ATTLIST Node callingParam CDATA #REQUIRED>

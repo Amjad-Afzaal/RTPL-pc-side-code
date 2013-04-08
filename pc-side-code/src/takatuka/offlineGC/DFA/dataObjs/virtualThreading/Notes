@@ -1,0 +1,46 @@
+
+We want threads to be called in the pc-side-code virtual interpreter
+just like in Java normally interpreter.
+------------------------------------------------------------------------------
+
+Thread state data:
+
+-- All thread have same heap.
+--- That means if a thread is created inside a class using a new private class
+    then that thread can access the method of public class in which it was created.
+
+-- Each thread has it own stack and local variables.
+
+-- Each thread has it own flow diagram that is independent from other threads.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+How threads are started:
+
+- Thread can be started in two ways:
+
+1) Make a class that extends thread and then call the start method on that class. In this case the JVM should start the new thread with run method.
+
+2) A new class implementing Runnable. Then Use new Thread(classobj).start();
+
+
+How to recognizse above two things.
+
+If the method called name in start() and it either called on a thread class (or any of its subclasses) object. Then we start a new thread.
+In short whenever the start method of the thread class is called it end up creating a new thread corresponding to an object.
+
+**************************************************************************************
+
+Implementation:
+
+We will have a thread controller:-
+
+-- It will have "VirtualThread" Objects:
+---- Each "VirtualThread" object corresponding objects on which thread is created. We will never create more than one thread per object.
+
+-- The information we have inside instructions should be inside that object. The instruction has no information inside them about frame.
+
+-- We run thread one by one.  That it first we complete running on one thread and add any thread that it creates in the controller.
+Secondly we run the second thread and so on.
+
+-- The VirtualThread object also contain the flow graph for a given thread.

@@ -1,0 +1,20 @@
+#List of instructions opcodes seperated by newLine charaters that MUST come at the END of an instruction block. 
+#You can also specify range by using @RANGE <StartRange-Opcode> <EndRange-Opcode>
+
+
+#all return and branch instructions
+@RANGE 153 179
+
+#ifnull, goto_w and jsr_w
+@RANGE 198 201
+
+#all invoke instructions
+@RANGE 182 185
+
+#monitor instructions.
+@RANGE 194 195
+
+#throw (Not sure about that ... ask LU)
+191
+
+

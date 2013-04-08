@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : FunctionFlowGraphSample.xml
+    Created on : 27. January 2010, 17:54
+    Author     : aslam
+    Description:
+-->
+<!DOCTYPE FunctionFlowGraph SYSTEM "FunctionFlowGraph.dtd">
+<FunctionFlowGraph>
+    <Node name="test" instrId="23" callingParam="a b c">
+    <Node name="test1" instrId="223" callingParam="x y z"/>
+    </Node>
+    <Node name="test3" instrId="232" callingParam="m n"/>
+
+</FunctionFlowGraph>

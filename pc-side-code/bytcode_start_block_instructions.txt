@@ -1,0 +1,2 @@
+#List of instructions opcodes seperated by newLine charaters that MUST come at the START of an instruction block. 
+#You can also specify range by using @RANGE <StartRange-Opcode> <EndRange-Opcode>

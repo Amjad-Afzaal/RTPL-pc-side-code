@@ -1,0 +1,683 @@
+# Implementation of the (original Java) bytecodes for Takatuka
+#
+# Format:
+#   @BYTECODE_NAME [(type) get_argument_function]
+#    lines of c code (may include blanks). 
+#    * if '(type) get_argument_function' is omitted, there are no
+#      arguments for this instruction to pass directly
+#    * arguments should be casted to 'type'
+#    * the argument should be
+#      inserted at token '@@1' 
+#    * arguments can be retreived from the tukfile with
+#      'get_argument_function( length )'
+#    * pc_inc at the begining case and should be the length of the instruction (example pc_inc=2;)
+
+@OP_NOP 
+fun_nop(); 
+
+@OP_ACONST_NULL
+fun_aconst_null(); 
+
+@OP_ICONST_M1
+do_iconst(-1); 
+
+@OP_ICONST_0
+do_iconst(0); 
+
+@OP_ICONST_1
+do_iconst(1); 
+
+@OP_ICONST_2
+do_iconst(2); 
+
+@OP_ICONST_3
+do_iconst(3); 
+
+@OP_ICONST_4
+do_iconst(4); 
+
+@OP_ICONST_5
+do_iconst(5); 
+
+@OP_LCONST_0
+fun_lconst_0(); 
+
+@OP_LCONST_1
+fun_lconst_1(); 
+
+@OP_FCONST_0
+do_fconst(0); 
+
+@OP_FCONST_1
+do_fconst(1); 
+
+@OP_FCONST_2
+do_fconst(2); 
+
+@OP_DCONST_0
+fun_dconst_0(); 
+
+@OP_DCONST_1
+fun_dconst_1(); 
+
+@OP_BIPUSH (jbyte) bytecode_getarg_signed
+fun_bipush(@@1);
+
+@OP_SIPUSH (jshort) bytecode_getarg_signed
+fun_sipush(@@1); 
+
+@OP_LDC (uint8_t) bytecode_getarg_unsigned
+fun_ldc_string(@@1); 
+
+@OP_LDC_W (uint16_t) bytecode_getarg_unsigned
+fun_ldc_w_string(@@1); 
+
+@OP_LDC2_W (uint16_t) bytecode_getarg_unsigned
+fun_ldc2_w_double(@@1); 
+
+@OP_ILOAD (uint8_t) bytecode_getarg_unsigned
+do_load_num32(@@1); 
+
+@OP_LLOAD (uint8_t) bytecode_getarg_unsigned
+do_load_num64(@@1); 
+
+@OP_FLOAD (uint8_t) bytecode_getarg_unsigned
+do_load_num32(@@1); 
+
+@OP_DLOAD (uint8_t) bytecode_getarg_unsigned
+fun_dload(@@1); 
+
+@OP_ALOAD (uint8_t) bytecode_getarg_unsigned
+fun_aload( @@1 );
+
+@OP_ILOAD_0
+do_load_num32(0); 
+
+@OP_ILOAD_1
+do_load_num32(1); 
+
+@OP_ILOAD_2
+do_load_num32(2); 
+
+@OP_ILOAD_3
+do_load_num32(3); 
+
+@OP_LLOAD_0
+do_load_num64(0); 
+
+@OP_LLOAD_1
+do_load_num64(1); 
+
+@OP_LLOAD_2
+do_load_num64(2); 
+
+@OP_LLOAD_3
+do_load_num64(3); 
+
+@OP_FLOAD_0
+do_load_num32(0); 
+
+@OP_FLOAD_1
+do_load_num32(1); 
+
+@OP_FLOAD_2
+do_load_num32(2); 
+
+@OP_FLOAD_3
+do_load_num32(3); 
+
+@OP_DLOAD_0
+do_load_num64(0); 
+
+@OP_DLOAD_1
+do_load_num64(1); 
+
+@OP_DLOAD_2
+do_load_num64(2); 
+
+@OP_DLOAD_3
+do_load_num64(3); 
+
+@OP_ALOAD_0
+fun_aload( 0 );
+
+@OP_ALOAD_1
+fun_aload( 1 );
+
+@OP_ALOAD_2
+fun_aload( 2 );
+
+@OP_ALOAD_3
+fun_aload( 3 );
+
+@OP_IALOAD
+THROWS(fun_iaload();) 
+
+@OP_LALOAD
+THROWS(fun_laload();) 
+
+@OP_FALOAD
+THROWS(fun_faload();) 
+
+@OP_DALOAD
+THROWS(fun_daload(); )
+
+@OP_AALOAD
+THROWS(fun_aaload(); )
+
+@OP_BALOAD
+THROWS(fun_baload(); )
+
+@OP_CALOAD
+THROWS(fun_caload(); )
+
+@OP_SALOAD
+THROWS(fun_saload(); )
+
+@OP_ISTORE (uint8_t) bytecode_getarg_unsigned
+do_store_num32(@@1); 
+
+@OP_LSTORE (uint8_t) bytecode_getarg_unsigned
+do_store_num64(@@1); 
+
+@OP_FSTORE (uint8_t) bytecode_getarg_unsigned
+do_store_num32(@@1); 
+
+@OP_DSTORE (uint8_t) bytecode_getarg_unsigned
+fun_dstore(@@1); 
+
+@OP_ASTORE (uint8_t) bytecode_getarg_unsigned
+fun_astore( @@1 );
+
+@OP_ISTORE_0
+do_store_num32( 0 );
+
+@OP_ISTORE_1
+do_store_num32( 1 );
+
+@OP_ISTORE_2
+do_store_num32( 2 );
+
+@OP_ISTORE_3
+do_store_num32( 3 );
+
+@OP_LSTORE_0
+do_store_num64(0); 
+
+@OP_LSTORE_1
+do_store_num64(1); 
+
+@OP_LSTORE_2
+do_store_num64(2); 
+
+@OP_LSTORE_3
+do_store_num64(3); 
+
+@OP_FSTORE_0
+do_store_num32(0); 
+
+@OP_FSTORE_1
+do_store_num32(1); 
+
+@OP_FSTORE_2
+do_store_num32(2); 
+
+@OP_FSTORE_3
+do_store_num32(3); 
+
+@OP_DSTORE_0
+do_store_num64(0); 
+
+@OP_DSTORE_1
+do_store_num64(1); 
+
+@OP_DSTORE_2
+do_store_num64(2); 
+
+@OP_DSTORE_3
+do_store_num64(3); 
+
+@OP_ASTORE_0
+fun_astore( 0 );
+
+@OP_ASTORE_1
+fun_astore( 1 );	
+
+@OP_ASTORE_2
+fun_astore( 2 );
+
+@OP_ASTORE_3
+fun_astore( 3 );
+
+@OP_IASTORE
+THROWS(fun_iastore(); )
+
+@OP_LASTORE
+THROWS(fun_lastore(); )
+
+@OP_FASTORE
+THROWS(fun_fastore(); )
+
+@OP_DASTORE
+THROWS(fun_dastore(); )
+
+@OP_AASTORE
+THROWS(fun_aastore(); )
+
+@OP_BASTORE
+THROWS(fun_bastore(); )
+
+@OP_CASTORE
+THROWS(fun_castore(); )
+
+@OP_SASTORE
+THROWS(fun_sastore(); )
+
+@OP_POP
+fun_pop(); 
+
+@OP_POP2
+fun_pop2(); 
+
+@OP_DUP
+fun_dup(); 
+
+@OP_DUP_X1
+fun_dup_x1(); 
+
+@OP_DUP_X2
+fun_dup_x2(); 
+
+@OP_DUP2
+fun_dup2(); 
+
+@OP_DUP2_X1
+fun_dup2_x1(); 
+
+@OP_DUP2_X2
+fun_dup2_x2(); 
+
+@OP_SWAP
+fun_swap(); 
+
+@OP_IADD
+fun_iadd(); 
+
+@OP_LADD
+fun_ladd(); 
+
+@OP_FADD
+fun_fadd(); 
+
+@OP_DADD
+fun_dadd(); 
+
+@OP_ISUB
+fun_isub(); 
+
+@OP_LSUB
+fun_lsub(); 
+
+@OP_FSUB
+fun_fsub(); 
+
+@OP_DSUB
+fun_dsub(); 
+
+@OP_IMUL
+fun_imul(); 
+
+@OP_LMUL
+fun_lmul(); 
+
+@OP_FMUL
+fun_fmul(); 
+
+@OP_DMUL
+fun_dmul(); 
+
+@OP_IDIV
+fun_idiv(); 
+
+@OP_LDIV
+fun_ldiv(); (uint8_t) bytecode_getarg_unsigned_offset
+
+@OP_FDIV
+fun_fdiv(); 
+
+@OP_DDIV
+fun_ddiv(); 
+
+@OP_IREM
+fun_irem(); 
+
+@OP_LREM
+fun_lrem(); 
+
+@OP_FREM
+fun_frem(); 
+
+@OP_DREM
+fun_drem(); 
+
+@OP_INEG
+fun_ineg(); 
+
+@OP_LNEG
+fun_lneg(); 
+
+@OP_FNEG
+fun_fneg(); 
+
+@OP_DNEG
+fun_dneg(); 
+
+@OP_ISHL
+fun_ishl(); 
+
+@OP_LSHL
+fun_lshl(); 
+
+@OP_ISHR
+fun_ishr(); 
+
+@OP_LSHR
+fun_lshr(); 
+
+@OP_IUSHR
+fun_iushr(); 
+
+@OP_LUSHR
+fun_lushr(); 
+
+@OP_IAND
+fun_iand(); 
+
+@OP_LAND
+fun_land(); 
+
+@OP_IOR
+fun_ior(); 
+
+@OP_LOR
+fun_lor(); 
+
+@OP_IXOR
+fun_ixor(); 
+
+@OP_LXOR
+fun_lxor(); 
+
+@OP_IINC (uint16_t) bytecode_getarg_unsigned
+fun_iinc( @@1 ); 
+
+@OP_I2L
+fun_i2l(); 
+
+@OP_I2F
+fun_i2f(); 
+
+@OP_I2D
+fun_i2d(); 
+
+@OP_L2I
+fun_l2i(); 
+
+@OP_L2F
+fun_l2f(); 
+
+@OP_L2D
+fun_l2d(); 
+
+@OP_F2I
+fun_f2i(); 
+
+@OP_F2L
+fun_f2l(); 
+
+@OP_F2D
+fun_f2d(); 
+
+@OP_D2I
+fun_d2i(); 
+
+@OP_D2L
+fun_d2l(); 
+
+@OP_D2F
+fun_d2f(); 
+
+@OP_INT2BYTE
+fun_int2byte(); 
+
+@OP_INT2CHAR
+fun_int2char(); 
+
+@OP_INT2SHORT
+fun_int2short(); 
+
+@OP_LCMP
+fun_lcmp(); 
+
+@OP_FCMPL
+fun_fcmpl(); 
+
+@OP_FCMPG
+fun_fcmpg(); 
+
+@OP_DCMPL
+fun_dcmpl(); 
+
+@OP_DCMPG
+fun_dcmpg(); 
+
+@OP_IFEQ (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifeq(@@1) ); 
+
+@OP_IFNE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifne(@@1) ); 
+
+@OP_IFLT (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_iflt(@@1) ); 
+
+@OP_IFGE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifge(@@1) ); 
+
+@OP_IFGT (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifgt(@@1) ); 
+
+@OP_IFLE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifle(@@1) ); 
+
+@OP_IF_ICMPEQ (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmpeq(@@1) ); 
+
+@OP_IF_ICMPNE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmpne(@@1) ); 
+
+@OP_IF_ICMPLT (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmplt(@@1) ); 
+
+@OP_IF_ICMPGE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmpge(@@1) ); 
+
+@OP_IF_ICMPGT (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmpgt(@@1) ); 
+
+@OP_IF_ICMPLE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_icmple(@@1) ); 
+
+@OP_IF_ACMPEQ (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_acmpeq(@@1) ); 
+
+@OP_IF_ACMPNE (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_if_acmpne(@@1) ); 
+
+@OP_GOTO (int32_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_goto(@@1) ); 
+
+@OP_JSR (int16_t) bytecode_getarg_signed
+fun_jsr(); 
+
+@OP_RET (uint8_t) bytecode_getarg_unsigned
+fun_ret(); 
+
+@OP_TABLESWITCH
+fun_tableswitch(); 
+
+@OP_LOOKUPSWITCH
+fun_lookupswitch(); 
+
+@OP_IRETURN
+fun_ireturn(); 
+
+@OP_LRETURN
+fun_lreturn(); 
+
+@OP_FRETURN
+fun_freturn(); 
+
+@OP_DRETURN
+fun_dreturn(); 
+
+@OP_ARETURN
+fun_areturn(); 
+
+@OP_RETURN
+fun_return(); 
+
+@OP_GETSTATIC (uint16_t) bytecode_getarg_unsigned
+fun_getstatic(@@1); 
+
+@OP_PUTSTATIC (uint16_t) bytecode_getarg_unsigned
+fun_putstatic(@@1); 
+
+@OP_GETFIELD (uint16_t) bytecode_getarg_unsigned
+THROWS(fun_getfield(@@1); )
+
+@OP_PUTFIELD (uint16_t) bytecode_getarg_unsigned
+THROWS(fun_putfield(@@1); )
+
+# @OP_INVOKEVIRTUAL_RETURN (jid) bytecode_getarg_unsigned
+# return_count++;
+# fun_invokevirtual(@@1);
+
+@OP_INVOKEVIRTUAL (jid) bytecode_getarg_unsigned
+fun_invokevirtual(@@1);
+
+@OP_INVOKESPECIAL (jid) bytecode_getarg_unsigned
+fun_invokespecial(@@1);
+
+@OP_INVOKESTATIC (jid) bytecode_getarg_unsigned
+fun_invokestatic(@@1); 
+
+@OP_INVOKEINTERFACE (jid) bytecode_getarg_unsigned
+fun_invokeinterface(@@1);
+
+@OP_XXXUNUSEDXXX
+fun_xxxunusedxxx(); 
+
+@OP_NEW (jid) bytecode_getarg_unsigned
+fun_new(@@1); 
+
+@OP_NEWARRAY (jtype) bytecode_getarg_unsigned
+fun_newarray(@@1); 
+
+@OP_ANEWARRAY (jid) bytecode_getarg_unsigned
+fun_anewarray(@@1); 
+
+@OP_ARRAYLENGTH
+THROWS(fun_arraylength(); )
+
+@OP_ATHROW
+fun_athrow(); 
+
+@OP_CHECKCAST (uint16_t) bytecode_getarg_unsigned
+fun_checkcast(@@1); 
+
+@OP_INSTANCEOF (uint16_t) bytecode_getarg_unsigned
+fun_instanceof(@@1); 
+
+@OP_MONITORENTER
+fun_monitorenter(); 
+
+@OP_MONITOREXIT
+THROWS(fun_monitorexit(); )
+
+@OP_WIDE
+fun_wide(); 
+
+@OP_MULTIANEWARRAY (jid) bytecode_getarg_unsigned (uint8_t) bytecode_getarg_unsigned
+fun_multianewarray(@@1 @@2); 
+
+@OP_IFNULL (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifnull(@@1) ); 
+
+@OP_IFNONNULL (int16_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_ifnonnull(@@1) ); 
+
+@OP_GOTO_W (int32_t) bytecode_getarg_signed
+BREAK_IF_ZERO( fun_goto_w(@@1) ); 
+
+@OP_JSR_W
+fun_jsr_w(); 
+
+@OP_LDC_INT (uint8_t) bytecode_getarg_unsigned
+fun_ldc_int(@@1);
+
+@OP_LDC_FLOAT (uint8_t) bytecode_getarg_unsigned
+fun_ldc_float( @@1 );
+
+@OP_LDC_W_INT (uint16_t) bytecode_getarg_unsigned
+fun_ldc_w_int( @@1 );
+
+@OP_LDC_W_FLOAT (uint16_t) bytecode_getarg_unsigned
+fun_ldc_w_float(@@1);
+
+@OP_LDC2_W_LONG (uint16_t) bytecode_getarg_unsigned
+ fun_ldc2_w_long(@@1);
+
+@OP_OFFLINE_GC_NEW (uint16_t) bytecode_getarg_unsigned
+fun_offline_gc_new(@@1); 
+
+@OP_OFFLINE_GC_FREE (uint16_t) bytecode_getarg_unsigned
+fun_offline_gc_free( @@1 );  
+
+@OP_LOAD_INT_FLOAT (uint32_t) bytecode_getarg_unsigned
+do_load_num32( @@1 );
+
+@OP_LOAD_LONG_DOUBLE (uint64_t) bytecode_getarg_unsigned
+do_load_num64( @@1 );
+
+@OP_LOAD_REFERENCE (uint16_t) bytecode_getarg_unsigned
+do_load_reference( @@1 );
+
+@OP_LOAD_SHORT_CHAR  (uint16_t) bytecode_getarg_unsigned
+do_load_num16( @@1 );
+
+@OP_LOAD_BYTE_BOOLEAN  (uint8_t) bytecode_getarg_unsigned
+do_load_num8( @@1 );
+    
+@OP_STORE_INT_FLOAT (uint32_t) bytecode_getarg_unsigned
+do_store_num32( @@1);
+
+@OP_STORE_LONG_DOUBLE (uint64_t) bytecode_getarg_unsigned
+do_store_num64( @@1);
+
+@OP_STORE_REFERENCE (uint16_t) bytecode_getarg_unsigned
+fun_astore( @@1);
+
+@OP_STORE_SHORT_CHAR (uint16_t) bytecode_getarg_unsigned
+do_store_num16( @@1);
+
+@OP_STORE_BYTE_BOOLEAN (uint8_t) bytecode_getarg_unsigned
+do_store_num8( @@1);
+
+@OP_CAST_STACK_LOCATION (uint8_t) bytecode_getarg_unsigned_offset (uint8_t) bytecode_getarg_unsigned_offset 
+fun_cast(@@1 @@2);
+
+@OP_CAST_METHOD_STACK_LOCATION (uint16_t) bytecode_getarg_unsigned_offset (uint8_t) bytecode_getarg_unsigned_offset (uint8_t) bytecode_getarg_unsigned_offset
+fun_castw(@@1 @@2 @@3);
+
+@OP_WIDE_IINC
+fun_nop(); 

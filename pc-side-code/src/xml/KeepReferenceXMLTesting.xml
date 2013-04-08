@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : KeepReferenceXMLSchema.xml
+    Created on : 4. November 2008, 12:11
+    Author     : aslam
+    Description:
+        Purpose of the document follows.
+-->
+
+<ns0:KeepReference  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:ns0='http://xml.netbeans.org/schema/KeepReferenceXMLSchema'
+   xsi:schemaLocation='http://xml.netbeans.org/schema/KeepReferenceXMLSchema KeepReferenceXMLSchema.xsd'>
+	
+ <ns0:Package name="*" includeSubPackages="true"/>
+ 
+ <!-- keep Main.class -->
+
+<!--
+ <ns0:ClassFile name="takatuka/loader/loadingFormat/StartMeLF" includeAllFunctions="false" includeAllFields="false">
+  	<ns0:Function name="main" description="([Ljava/lang/String;)V"/>
+  </ns0:ClassFile>
+-->
+
+
+ <!-- It may be is OKAY to keep following classes -->
+
+<!--
+  <ns0:ClassFile name="takatuka/vm/SpecialForStatics" includeAllFunctions="true" includeAllFields="true"/>
+-->
+
+</ns0:KeepReference>

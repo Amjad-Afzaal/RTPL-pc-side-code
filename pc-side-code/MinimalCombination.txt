@@ -1,0 +1,48 @@
+Let Kn be the costs for a path in the
+optimization search tree, ending with a
+(future) cn combination.
+
+Let k[b0..bm] be the costs for a combinated
+bytecode with the same semantics of the
+sequence b0, .., bm.
+E.g. k[aload_0]+k[getfield] denotes the costs
+for a field access, k[aload_0, getfield] the costs for
+the combined bytecode.
+
+Let i be the pc of the current executed
+bytecode (i.e. depth of the tree), bi the
+bytecode at this position.
+
+Let Dn(i) in {leave, combine} be the decision at bytecode i for each path.
+
+Then for i->i+1 the Kn can be adjusted with the following:
+
+K0 = min(
+            K0 + k[bi-0..bi],
+            K1 - k[bi-1..bi] + k[bi-1] + k[bi],
+            K2 - k[bi-2..bi] + k[bi-2] + k[bi-1] + k[bi],
+            K3 - k[bi-3..bi] + k[bi-3] + k[bi-2] + k[bi-1] + k[bi]
+        )
+
+K1 = min(
+            K0 - k[bi-0..bi] + k[bi..bi+1],
+            K1 - k[bi-1..bi] + k[bi-1] + k[bi..bi+1],
+            K2 - k[bi-2..bi] + k[bi-2] + k[bi-1] + k[bi..bi+1],
+            K3 - k[bi-3..bi] + k[bi-3] + k[bi-2] + k[bi-1] + k[bi..bi+1]
+        )
+
+K2 = min(
+            K1 - k[bi-1..bi] + k[bi-1..bi+1],
+            K2 - k[bi-2..bi] + k[bi-2] + k[bi-1..bi+1],
+            K3 - k[bi-3..bi] + k[bi-3] + k[bi-2] + k[bi-1..bi+1]
+        )
+
+K3 = min(
+            K2 - k[bi-2..bi] + k[bi-2..bi+1],
+            K3 - k[bi-3..bi] + k[bi-3] + k[bi-2..bi+1]
+        )
+
+
+For each substract k[bj0..bjm] of the mimimal value of Kn
+the decisions Dn(bj0)..Dn(bjm) have to be rewritten as leave
+and Dn(bi+1) should be combine.
